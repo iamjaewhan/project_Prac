@@ -71,13 +71,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project_Prac.wsgi.application'
 ASGI_APPLICATION = 'project_Prac.asgi.application'
-CHANNEL_LAYERS={
-    'dafault' :{
-        'BACKEND':'channels_redis.core.RedisChannelLayer',
-        'CONFIG':{
-            "hosts":[('127.0.0.1',6379)]
-        }
-    }
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }
 
 
