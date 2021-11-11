@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('chat/',include('chat.urls',namespace='chat')),
+    path('map/',include('map.urls',namespace='map')),
 ]
