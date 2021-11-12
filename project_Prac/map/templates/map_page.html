@@ -15,12 +15,18 @@
         <div>
             <button>아직 미정</button>
         </div>
+        <div>
+            <button onclick="showMarkers()">마커보이기</button>
+        </div>
+        <div>
+            <button onclick="hideMarkers()">마커숨기기</button>
+        </div>
         
     </div>
     <script>
         var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
         var options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+            center: new kakao.maps.LatLng(37.59727,127.05884), //지도의 중심좌표.
             level: 3 //지도의 레벨(확대, 축소 정도)
             };
         //지도 생성
@@ -29,7 +35,9 @@
         //주소-좌표 변환 객체 생성
         var geocoder=new kakao.maps.services.Geocoder();
 
-        //주소로 좌표 검색
+        //마커들을 저장하는 변수 
+        const markers=[];
+    
         geocoder.addressSearch('경기도 화성시 동탄대로 6길 20' ,function(result,status){
             if (status===kakao.maps.services.Status.OK){
                 var coords=new kakao.maps.LatLng(result[0].y,result[0].x);
@@ -38,15 +46,31 @@
                     map:map,
                     position:coords
                 });
+
+                markers.push(marker);
             }
         });
+
+        //현재 위치의 좌표를 반환하는 메소드
+        function getCurrentLocation(){
+            if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(function(position){
+                    var lat=position.coords.latitude,
+                    lon=position.coords.longitude;
+                    var locPosition=new kakao.maps.LatLng(lat,lon)
+                });
+            }else {
+                var locPosition=new kakao.maps.LatLng(33.450701,126.590667);
+            }
+            return locPosition;
+        }
 
         //현재위치 사용하기
         if (navigator.geolocation){
             navigator.geolocation.getCurrentPosition(function(position){
                 var lat=position.coords.latitude,
                 lon=position.coords.longitude;
-
+                
                 var locPosition=new kakao.maps.LatLng(lat,lon),
                 message='<div style="padding:3px;">here!</div>';
 
@@ -56,7 +80,6 @@
             else {
                 var locPosition=new kakao.maps.LatLng(33.450701,126.590667),
                 message="error!"
-
                 displayMarker(locPosition,message);
             }
         
@@ -83,6 +106,24 @@
             // 지도 중심좌표를 접속위치로 변경합니다
             map.setCenter(locPosition);    
                 
+        }
+
+        
+        //배열에 추가된 마커들을 지도에 표시하거나 숨기는 함수
+        function setMarkers(map){
+            for (var i =0;i<markers.length;i++){
+                markers[i].setMap(map);
+            }
+        }
+        
+        //마커 표시 함수
+        function showMarkers(){
+            setMarkers(map);
+        }
+
+        //마커 숨기기 함수
+        function hideMarkers(){
+            setMarkers(null);
         }
 
         
