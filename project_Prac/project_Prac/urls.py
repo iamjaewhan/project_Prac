@@ -23,5 +23,5 @@ urlpatterns = [
     path('', views.index),
     path('chat/',include('chat.urls',namespace='chat')),
     path('map/',include('map.urls',namespace='map')),
-    path('address/',include('address.urls',namespace='address'))
+    path('account/',include('account.urls',namespace='account')),
 ]

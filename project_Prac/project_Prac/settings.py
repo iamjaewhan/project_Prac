@@ -16,6 +16,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+##새로운 유저모델 생성
+AUTH_USER_MODEL='account.User'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -40,8 +42,7 @@ INSTALLED_APPS = [
     'chat',
     'map',
     'channels',
-    'user',
-    'address',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -89,14 +90,13 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Project_Prac',
-        'USER' : 'jay',
-        'PASSWORD':'mWodhks22#',
-        'HOST':'localhost',
-        'PORT':'3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':BASE_DIR/'sqlite3',
     }
 }
+
+
+
 
 
 # Password validation
