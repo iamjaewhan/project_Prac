@@ -3,5 +3,5 @@ from django.shortcuts import render
 # Create your views here.
 
 
-def getaddress(request):
-    return None
+def signup(request):
+    return render(request,'signup.html')

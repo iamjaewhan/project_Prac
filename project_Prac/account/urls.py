@@ -4,5 +4,5 @@ from . import views as account_views
 app_name="account"
 
 urlpatterns=[
-    path('',account_views.getaddress,name='getaddress'),
+    path('',account_views.signup,name='signup'),
 ]
