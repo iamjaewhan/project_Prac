@@ -21,7 +21,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('chat/',include('chat.urls',namespace='chat')),
-    path('map/',include('map.urls',namespace='map')),
-    path('account/',include('account.urls',namespace='account')),
+    path('chat/', include('chat.urls',namespace='chat')),
+    path('map/', include('map.urls',namespace='map')),
+    path('account/', include('account.urls',namespace='account')),
+    path('payment/', include('payment.urls',namespace='payment')),
 ]
